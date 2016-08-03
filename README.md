@@ -4,38 +4,38 @@
 使用时导入头文件#import "HYScrollMessageView.h"
 
 
-@interface ViewController ()
+    @interface ViewController ()
 
-{
-    NSArray *msgArray;
-}
-@property (strong, nonatomic) HYScrollMessageView *messageView;
+    {
+        NSArray *msgArray;
+    }
+    @property (strong, nonatomic) HYScrollMessageView *messageView;
 
-@end
+    @end
 
-@implementation ViewController
+    @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.title = @"Message";
-    msgArray= [NSArray arrayWithObjects:@"今天天气不错,哈哈",@"明天有雨，哈哈",@"后天晴天转多云",@"前天多云转晴，嘿嘿", nil];
-    _messageView = [[HYScrollMessageView alloc]initWithFrame:CGRectMake(50, 100, 200, 25)];
-    [_messageView makeMsgArr:msgArray];
-    __weak typeof (self) myself = self;
-    _messageView.messageClickBlock = ^(){
-        WebViewController *vc = [[WebViewController alloc] init];
-        [myself.navigationController pushViewController:vc animated:YES];
-    };
-    [self.view addSubview:_messageView];
+    - (void)viewDidLoad {
+        [super viewDidLoad];
+        // Do any additional setup after loading the view, typically from a nib.
+        self.title = @"Message";
+        msgArray= [NSArray arrayWithObjects:@"今天天气不错,哈哈",@"明天有雨，哈哈",@"后天晴天转多云",@"前天多云转晴，嘿嘿", nil];
+        _messageView = [[HYScrollMessageView alloc]initWithFrame:CGRectMake(50, 100, 200, 25)];
+        [_messageView makeMsgArr:msgArray];
+        __weak typeof (self) myself = self;
+        _messageView.messageClickBlock = ^(){
+            WebViewController *vc = [[WebViewController alloc] init];
+            [myself.navigationController pushViewController:vc animated:YES];
+        };
+        [self.view addSubview:_messageView];
     
-}
+    }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-     [_messageView startTimer];
-}
+    - (void)viewWillAppear:(BOOL)animated
+    {
+         [_messageView startTimer];
+    }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [_messageView stopTimer];
-}
+    - (void)viewWillDisappear:(BOOL)animated{
+        [_messageView stopTimer];
+    }
